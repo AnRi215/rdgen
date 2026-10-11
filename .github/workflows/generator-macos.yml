@@ -494,7 +494,7 @@ jobs:
         if: env.removeNewVersionNotif == 'true'
         run: | 
           sed -i -e 's|updateUrl.isNotEmpty|false|' ./flutter/lib/desktop/pages/desktop_home_page.dart
-          sed -i '/let (request, url) =/,/Ok(())/{/Ok(())/!d}' ./src/common.rs
+          sed -i '' '/let (request, url) =/,/Ok(())/{/Ok(())/!d}' ./src/common.rs
 
       - name: Restore bridge files
         uses: actions/download-artifact@master
@@ -549,7 +549,7 @@ jobs:
         run: |
           APP=$(find ./flutter/build/macos/Build/Products/Release -maxdepth 1 -name "*.app" | head -n 1)
           echo "App bundle: $APP"
-          echo -n '${{ env.custom }}' > "$APP/Contents/MacOS/custom_.txt"
+          echo -n '${{ env.custom }}' > "$APP/Contents/Resources/custom_.txt"
           ls -l "$APP/Contents/MacOS/custom_.txt"
       
       - name: Install rcodesign tool
